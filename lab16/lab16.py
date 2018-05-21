@@ -1,40 +1,27 @@
 #Nome: Francisco Namias Vicente
 #RA: 216028
 
-#  Funcao: removePalavras
-# 
-#  Parametros:
-#    s: string contendo o texto de entrada
-#    vs: lista de strings com as palavras a serem removidas
-# 
-#  Descricao:
-#    Deve-se remover as palavras de s que estiverem listadas em vs.
-#    Ao final, s nao deve conter espacos extras.
-#
-# Retorno:
-#   string s sem as palavras de vs.
-
 def removePalavras(s, vs):
-    
-    return ''
+    s = s.split() #divide the string into a list
+    for x in range(len(vs)): #remove all the words(vs) in s
+        while vs[x] in s:
+            s.remove(vs[x]) 
+    s = " ".join(s) #transform s in a string
+    return s
 
-#  Funcao: pagsResposta
-#
-# Parametros:
-#   paginas: lista de strings cada uma representando uma pagina
-#   termosBusca: lista de strings com os termos a serem buscados
-#
-# Descricao:
-#	Deve verificar se cada página em paginas contém todos os termos
-#	de busca em termosBusca. Se a paginas[i] contiver todos os termos
-#	então deve-se atribuir 1 para resp[i] e 0 caso não contenha pelo
-#	menus um dos termos de busca.
-#
-# Retorno:
-#   lista a ser preenchida como resposta, de dimensao numPag.
-
-def pagsResposta(palavrasPagina, termosBusca):	
-	return []
+def pagsResposta(palavrasPagina, termosBusca):
+    res,zero = [], False
+    for x in range(len(palavrasPagina)):
+        for y in range(len(termosBusca)):
+            if termosBusca[y] not in palavrasPagina[x]:
+                res.append(0)
+                zero = True
+                break
+        if zero == False: 
+            res.append(1)
+        zero = False
+    print(res)
+    return res
 	
 
 #  Funcao: linksResposta
