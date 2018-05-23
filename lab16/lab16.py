@@ -9,35 +9,26 @@ def removePalavras(s, vs):
     s = " ".join(s) #transform s in a string
     return s
 
+
 def pagsResposta(palavrasPagina, termosBusca):
     res,zero = [], False
     for x in range(len(palavrasPagina)):
         for y in range(len(termosBusca)):
-            if termosBusca[y] not in palavrasPagina[x]:
-                res.append(0)
+            if termosBusca[y] not in (palavrasPagina[x]).split(): #if any word from termosBusca isn't at palavrasPagina,
+                res.append(0)                                      #add 0 to the list
                 zero = True
                 break
-        if zero == False: 
-            res.append(1)
+        if zero == False:  #if there are all words,
+            res.append(1)  #add 1
         zero = False
-    print(res)
     return res
-	
 
-#  Funcao: linksResposta
-#
-# Parametros:
-#   links: matriz quadrada binária representando links entre as paginas 
-#   resp: lista obtido apos execucao de pagsResposta
-#
-# Descricao:
-#   Deve-se preencher uma lista numLinks da seguinte maneira: para cada
-#   posicao i (0 <= i < numPags), se resp[i] == 1, então numLinks[i] deve conter
-#   o numero de links de outras paginas resposta para i. Caso resp[i] == 0,
-#   entao numLinks[i] deve ser -1.
-#
-# Retorno
-#   lista numLinks a ser preenchida como resposta, de tamanho numPag
 
 def linksResposta(links,resp):
-	return []
+    numLinks = [ 0 for i in range(len(resp))]
+    for x in range(len(resp)):
+        if resp[x] == 0: numLinks[x] = -1 #if "resp" of the page[x] was 0, the out should be -1
+        else:
+            for i in range(len(resp)):
+                if resp[i] != 0: numLinks[x] += links[i][x] #if "resp" of the page[x] was 1, should add every "reference"
+    return numLinks
